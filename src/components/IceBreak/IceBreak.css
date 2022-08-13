@@ -170,3 +170,21 @@
   width: 60px;
   height: 60px;
 }
+
+.icebreak {
+  position: relative;
+  top: 100px;
+}
+
+.trickContainer {
+  width: 500px;
+  height: 300px;
+
+  position: relative;
+}
+
+@media (min-width: 1800px) {
+  .trick {
+    left: 770px !important;
+  }
+}
