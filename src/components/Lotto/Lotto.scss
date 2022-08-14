@@ -59,23 +59,31 @@
 }
 
 .LottoInput {
+  padding: 10px;
   position: absolute;
   top: 18%;
-  left: 15%;
+  left: 55%;
   transform: translate3d(46%, -30%, 0);
 }
 
 .register {
   position: absolute;
   top: 18%;
-  left: 35%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
+  left: 71%;
   transform: translate3d(46%, -30%, 0);
 }
 
 .delete {
   position: absolute;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
+
   top: 18%;
-  left: 45%;
+  left: 75%;
   transform: translate3d(46%, -30%, 0);
 }
 

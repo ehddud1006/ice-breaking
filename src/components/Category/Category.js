@@ -3,12 +3,25 @@ import "./Category.scss";
 const Category = ({ category, setCategory }) => {
   console.log(category);
   return (
-    <div className={category === "lotto" ? `Categorymodal2` : `Categorymodal`}>
+    <div
+      className={
+        category === "lotto" || category === "table"
+          ? `Categorymodal2`
+          : `Categorymodal`
+      }
+    >
       <div
         onClick={() => setCategory("icebreak")}
         className="Categorycard  Categoryarchipelago"
       >
-        <a className="Categorycard-category" href="#" title="HTML & CSS">
+        <a
+          className={
+            category === "icebreak"
+              ? `Categorycard-category cattt`
+              : `Categorycard-category`
+          }
+          title="HTML & CSS"
+        >
           <span>아이스 브레이킹</span>
         </a>
       </div>
@@ -16,26 +29,46 @@ const Category = ({ category, setCategory }) => {
         onClick={() => setCategory("future")}
         className="Categorycard  Categorybutte"
       >
-        <a className="Categorycard-category" href="#" title="HTML & CSS">
+        <a
+          className={
+            category === "future"
+              ? `Categorycard-category cattt`
+              : `Categorycard-category`
+          }
+          title="HTML & CSS"
+        >
           <span>일정 추천</span>
         </a>
       </div>
+
       <div
         onClick={() => setCategory("lotto")}
-        className="Categorycard  Categorycanyon"
+        className="Categorycard  Categorydune"
       >
-        <a className="Categorycard-category" href="#" title="HTML & CSS">
+        <a
+          className={
+            category === "lotto"
+              ? `Categorycard-category cattt`
+              : `Categorycard-category`
+          }
+          title="HTML & CSS"
+        >
           <span>대표자 뽑기</span>
         </a>
       </div>
-      <div className="Categorycard  Categorydune">
-        <a className="Categorycard-category" href="#" title="HTML & CSS">
-          <span>Dune</span>
-        </a>
-      </div>
-      <div className="Categorycard  Categoryestuary">
-        <a className="Categorycard-category" href="#" title="HTML & CSS">
-          <span>Estuary</span>
+      <div
+        onClick={() => setCategory("table")}
+        className="Categorycard  Categoryestuary"
+      >
+        <a
+          className={
+            category === "table"
+              ? `Categorycard-category cattt`
+              : `Categorycard-category`
+          }
+          title="HTML & CSS"
+        >
+          <span>주제 순위</span>
         </a>
       </div>
     </div>

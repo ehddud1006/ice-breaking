@@ -1,24 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Lotto.scss";
 import $ from "jquery";
 import swal from "sweetalert2";
 import Category from "../Category/Category";
 const Lotto = ({ category, setCategory }) => {
+  const ref = useRef();
   const [name, setName] = useState("");
-
+  const [totalItems, setTotalItems] = useState(0);
   const onChange = (e) => {
     setName(e.target.value);
   };
-  const [prizes, setPrizes] = useState([
-    "김동영",
-    "김동영",
-    "김동영",
-    "김동영",
-    "김동영",
-    "김동영",
-    "김동영",
-  ]);
-  const total_items = prizes.length;
+  const [prizes, setPrizes] = useState([]);
   const minimum_jumps = 30; // 超過這數字開始進入抽獎
   let current_index = -1;
   let jumps = 0;
@@ -26,6 +18,7 @@ const Lotto = ({ category, setCategory }) => {
   let timer = 0;
   let prize = -1;
   const registerData = () => {
+    setTotalItems(prizes.length + 1);
     setPrizes([...prizes, name]);
     setName("");
   };
@@ -34,7 +27,7 @@ const Lotto = ({ category, setCategory }) => {
 
     current_index += 1;
 
-    if (current_index > total_items - 1) {
+    if (current_index > totalItems - 1) {
       current_index = 0;
     }
 
@@ -42,7 +35,7 @@ const Lotto = ({ category, setCategory }) => {
   }
 
   function generatePrizeNumber() {
-    return Math.floor(Math.random() * total_items);
+    return Math.floor(Math.random() * totalItems);
   }
 
   function controllSpeed() {
@@ -53,7 +46,7 @@ const Lotto = ({ category, setCategory }) => {
       clearTimeout(timer);
 
       new swal({
-        title: `You Have Won a Prize ${prizes[current_index]}`,
+        title: `당첨자는 ${prizes[current_index]} 입니다.`,
         text: "Congratulations!",
         icon: "success",
       });
@@ -92,9 +85,9 @@ const Lotto = ({ category, setCategory }) => {
     controllSpeed();
   }
 
-  $(document).ready(() => {
-    $("#js-start").on("click", init);
-  });
+  //   $(document).ready(() => {
+  //     $("#js-start").on("click", init);
+  //   });
 
   return (
     <>
@@ -104,7 +97,11 @@ const Lotto = ({ category, setCategory }) => {
             if (Math.floor(prizes.length / 2) === index) {
               return (
                 <>
-                  <div class="square square__start-btn" id="js-start">
+                  <div
+                    onClick={init}
+                    class="square square__start-btn"
+                    id="js-start"
+                  >
                     <div>START</div>
                   </div>
                   <div class="square" data-order={index}>

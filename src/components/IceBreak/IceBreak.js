@@ -5,7 +5,7 @@ import CuteCat from "../CuteCat/CuteCat";
 import BackCard from "../BackCard/BackCard";
 import Category from "../Category/Category";
 import "./IceBreak.css";
-const IceBreak = ({ category, setCategory }) => {
+const IceBreak = ({ rank, setRank, category, setCategory }) => {
   const [topic, setTopic] = useState("");
   const [realTopic, setRealTopic] = useState("");
   const [active, setActive] = useState(false);
@@ -14,6 +14,7 @@ const IceBreak = ({ category, setCategory }) => {
   const animationHeartRef = useRef();
 
   const callApi = async () => {
+    setActive(false);
     await axios.get("http://localhost:8080/question").then(async (res) => {
       console.log(res.data);
       setTopic(res.data);
@@ -34,7 +35,9 @@ const IceBreak = ({ category, setCategory }) => {
         onSub();
       }, 800);
     };
+
     ref.current.addEventListener("mouseenter", listener);
+
     return () => {
       window.removeEventListener("mouseenter", listener);
     };
@@ -54,6 +57,18 @@ const IceBreak = ({ category, setCategory }) => {
           source.connect(context.destination);
           source.start(0);
         });
+      });
+  };
+
+  const like = () => {
+    axios
+      .post("http://localhost:8080/question", {
+        question: topic,
+      })
+      .then((res) => {
+        console.log(res);
+        setRank(res.data);
+        console.log(res.data);
       });
   };
   // heartRef.curret.addEventListener("click", () => {
@@ -81,7 +96,13 @@ const IceBreak = ({ category, setCategory }) => {
     <div className="icebreak">
       <div className="wrapper">
         <div ref={ref} class="flip">
-          <div onClick={() => setActive(!active)} className="trick"></div>
+          <div
+            onClick={() => {
+              setActive(!active);
+              like();
+            }}
+            className="trick"
+          ></div>
           <div class="Appcard">
             <div class="front">
               <CuteCat
